@@ -78,8 +78,6 @@ function moveSnake(){
         score = score + 1;
         scoreText.textContent = score;
         createFood();
-        createObstacles();
-        drawObstacles();
     }
     else{
         snake.pop();
@@ -145,8 +143,13 @@ function checkGameOver(){
         }
     }
     for(let i = 0; i < obstacles.length; i++){
-        if(snake[0].x == obstacles[i].x && snake[0].y == obstacles[i].y){
-            running = false;
+        const x = obstacles[i].x;
+        const y = obstacles[i].y;
+        const w = obstacles[i].w;
+        const h = obstacles[i].h;
+        if(x <= snake[0].x && snake[0].x <= (x + w)
+            && y <= snake[0].y && snake[0].y <= (y + h)){
+            running = false
         }
     }
 
@@ -170,17 +173,19 @@ function resetGame(){
     gameStart();
 };
 function createObstacles(){
-    obstacles.length = Math.floor(Math.random() * 4);
+    obstacles.length = 4;
     for(let i=0; i< obstacles.length; i++){
         obstacles[i] = {x: randomEl(0, gameWidth - unitSize),
-                        y: randomEl(0, gameWidth - unitSize)}
+                        y: randomEl(0, gameWidth - unitSize),
+                        w: Math.floor(Math.random() * (3 - 1) + 1) * unitSize,
+                        h: Math.floor(Math.random() * (3 - 1) + 1) * unitSize, }
     }
 };
 function drawObstacles(){
     ctx.fillStyle = obstacleColor;
     ctx.strokeStyle = snakeBorder;
     obstacles.forEach((el)=>{
-        ctx.fillRect(el.x, el.y, unitSize, unitSize);
-        ctx.strokeRect(el.x, el.y, unitSize, unitSize);
-    })  
+        ctx.fillRect(el.x, el.y, el.w, el.h);
+        ctx.strokeRect(el.x, el.y, el.w, el.h);
+    });
 };
