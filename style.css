@@ -1,5 +1,6 @@
 .container{
     text-align: center;
+    font-family: "Permanent Marker", cursive;
 }
 
 #game {
@@ -7,14 +8,18 @@
 }
 
 .score{
-    font-family: "Permanent Marker", cursive;
     font-size: 100px;
 }
 
 .reset{
-    font-family: "Permanent Marker", cursive;
     font-size: 22px;
     padding: 10px 20px;
     border-radius: 15px;
     cursor: pointer;
+}
+
+.rules {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
